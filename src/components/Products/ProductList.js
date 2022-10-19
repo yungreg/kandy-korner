@@ -11,7 +11,7 @@ import { useEffect, useState } from "react"
 
 export const ProductList = () => {
     const [products, setProductList] = useState([])
-    const [filteredProducts, setFilteredProductList] = useState([])
+    const [filteredProducts, setFilteredProductList] = useState([{}])
     const [topPriceList, setTopPriceList] = useState(false)
 
     const localKandyUser = localStorage.getItem("kandy_user")
@@ -19,7 +19,7 @@ export const ProductList = () => {
 
     useEffect(
         () => {
-            fetch(`http://localhost:8088/products`)
+            fetch(`http://localhost:8088/products?_expand=productType`)
             .then(response => response.json())
             .then((productObj) => {
                 setProductList(productObj)
@@ -27,7 +27,7 @@ export const ProductList = () => {
         },
         [] // When this array is empty, you are observing initial component state
     )
-//todo: filter the products by a priice per unit of over $2
+// todo*: filter the products by a priice per unit of over $2
     useEffect(() =>{
         if(topPriceList){
             const topPricedProducts = products.filter(product => product.pricePerUnit > 2) 
@@ -50,14 +50,16 @@ export const ProductList = () => {
     {
         filteredProducts.map(
             (product) => {
-                return <section key={product.id} className="products_listitem">
+                return <>
+                <section key={product.id} className="products_listitem">
                     <ul>
                         <li>Product Name: {product.name}</li> 
                         <li>Price Per Unit: ${product.pricePerUnit} </li>
-                        <li>Product Type:</li>
+                        <li>Product Type: {product.productType?.kandyType}</li>
                     </ul>
-
+                    //^add in the poroduct type interpolation 
                 </section>
+                </>
             }
         )
     }

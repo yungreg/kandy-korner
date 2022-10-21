@@ -5,6 +5,7 @@ import { NavBar } from "./nav/NavBar"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
 import "./KandyKorner.css"
+import { EmployeeNewProductForm } from "./EmployeeForm/EmployeeForm"
 
 
 export const KandyKorner = () => {
@@ -17,6 +18,7 @@ export const KandyKorner = () => {
 				<>
 					<NavBar class="navbar"/>
 					<ApplicationViews />
+				
 				</>
 			</Authorized>
 

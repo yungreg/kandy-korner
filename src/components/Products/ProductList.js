@@ -1,15 +1,19 @@
 /*
 to
 *todo: import useeffect/use state
-todo: refactor to create the productList componnet to display an ul of products for //!employees only
+*todo: refactor to create the productList componnet to display an ul of products for //!employees only
+*todo: make teh button take you to teh employeeform route
+todo: why is the ewmployee form showing up on produvcts ?
 todo: send that off to be used by acpplication views. 
 */
 
 
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 
 export const ProductList = () => {
+    const navigate = useNavigate()
     const [products, setProductList] = useState([])
     const [filteredProducts, setFilteredProductList] = useState([{}])
     const [topPriceList, setTopPriceList] = useState(false)
@@ -57,12 +61,15 @@ export const ProductList = () => {
                         <li>Price Per Unit: ${product.pricePerUnit} </li>
                         <li>Product Type: {product.productType?.kandyType}</li>
                     </ul>
-                    //^add in the poroduct type interpolation 
+                   
                 </section>
                 </>
             }
         )
     }
 </article>
+
+//todo*: make teh route for the button cclick
+<button onClick={() => navigate("/Products/EmployeeForm/EmployeeForm")}>Create New Product</button>
 </>
 }
